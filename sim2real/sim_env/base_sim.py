@@ -66,6 +66,21 @@ class BaseSimulator:
         self.mj_data = mujoco.MjData(self.mj_model)
         self.mj_model.opt.timestep = self.sim_dt
 
+        # Allow sim2sim door difficulty to be changed from the deployment YAML.
+        # MuJoCo joint friction loss is expressed as a torque threshold (N*m).
+        door_joint_id = mujoco.mj_name2id(
+            self.mj_model, mujoco.mjtObj.mjOBJ_JOINT, "door_hinge"
+        )
+        if door_joint_id >= 0:
+            if "DOOR_HINGE_FRICTIONLOSS" in self.config:
+                self.mj_model.jnt_frictionloss[door_joint_id] = float(
+                    self.config["DOOR_HINGE_FRICTIONLOSS"]
+                )
+            if "DOOR_HINGE_DAMPING" in self.config:
+                self.mj_model.dof_damping[self.mj_model.jnt_dofadr[door_joint_id]] = float(
+                    self.config["DOOR_HINGE_DAMPING"]
+                )
+
         base_body_name = self.config.get("BASE_BODY_NAME", "pelvis")
         self.base_id = self.mj_model.body(base_body_name).id
 

@@ -1,5 +1,7 @@
 <mujoco model="g1_29dof scene">
   <include file="g1_29dof_old_freebase.xml"/>
+  <!-- Articulated door used for sim2sim loco-manipulation evaluation. -->
+  <include file="door/door.xml"/>
 
   <statistic center="0 0 0.5" extent="2.0"/>
 

@@ -4,7 +4,7 @@ ASSET_ROOT: "../humanoidverse/data/robots/t1" # Robot Asset Root
 ASSET_FILE: "../humanoidverse/data/robots/t1/t1_29dof.urdf" # Robot Asset File"
 
 # Model path for the trained policy
-model_path: "models/falcon/t1_29dof/model_9999.onnx"
+model_path: "models/falcon/t1_29dof.onnx“
 
 # Yuanhang
 SDK_TYPE: "booster" # SDK type, "unitree", "booster"

@@ -1,49 +1,52 @@
 <h1 align="center"> FALCON: Learning Force-Adaptive Humanoid Loco-Manipulation </h1>
+<!-- FALCON: 学习力自适应的人形运动操作 -->
 
 <div align="center">
 
 Learning for Dynamics & Control Conference (L4DC) 2026
 <b><span style="color:#e63946;">Oral</span></b>
+<!-- L4DC 2026 会议口头报告 -->
 
 </div>
 
 <div align="center">
 
-[[Website]](https://lecar-lab.github.io/falcon-humanoid/)
-[[Arxiv]](https://lecar-lab.github.io/falcon-humanoid/)
-[[Video]](https://www.youtube.com/watch?v=OfsvJ5-Fyzg)
+[[Website]](https://lecar-lab.github.io/falcon-humanoid/) <!-- 项目官网 -->
+[[Arxiv]](https://lecar-lab.github.io/falcon-humanoid/) <!-- Arxiv 预印本 -->
+[[Video]](https://www.youtube.com/watch?v=OfsvJ5-Fyzg) <!-- 视频演示 -->
 
 <img src="assets/ip.png" style="height:100px;" />
 
-
-
-
 [![IsaacGym](https://img.shields.io/badge/IsaacGym-Preview4-b.svg)](https://developer.nvidia.com/isaac-gym) [![Linux platform](https://img.shields.io/badge/Platform-linux--64-orange.svg)](https://ubuntu.com/blog/tag/22-04-lts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
-
 
 <img src="assets/hero_static.gif" width="100%"/>
 
 </div>
 
 ## TODO
-- [x] Release training code
-- [x] Release sim2sim code
-- [x] Release sim2real code
+- [x] Release training code <!-- 发布训练代码 -->
+- [x] Release sim2sim code <!-- 发布仿真到仿真迁移代码 -->
+- [x] Release sim2real code <!-- 发布仿真到实机迁移代码 -->
 
 
 # Installation
+<!-- 安装指南 -->
 
 ## IsaacGym Conda Env
+<!-- IsaacGym Conda 环境配置 -->
 
 Create mamba/conda environment, in the following we use conda for example, but you can use mamba as well.
+<!-- 创建 mamba/conda 环境，下面以 conda 为例，也可使用 mamba -->
 
 ```bash
 conda create -n fcgym python=3.8
 conda activate fcgym
 ```
 ### Install IsaacGym
+<!-- 安装 IsaacGym -->
 
 Download [IsaacGym](https://developer.nvidia.com/isaac-gym/download) and extract:
+<!-- 下载 IsaacGym 并解压 -->
 
 ```bash
 wget https://developer.nvidia.com/isaac-gym-preview-4
@@ -51,12 +54,14 @@ tar -xvzf isaac-gym-preview-4
 ```
 
 Install IsaacGym Python API:
+<!-- 安装 IsaacGym Python API -->
 
 ```bash
 pip install -e isaacgym/python
 ```
 
 Test installation:
+<!-- 测试安装 --> 
 
 ```bash
 cd isaacgym/python/examples
@@ -66,6 +71,7 @@ python joint_monkey.py
 ```
 
 For libpython error:
+<!-- 若遇到 libpython 错误： -->
 
 - Check conda path:
     ```bash
@@ -77,6 +83,7 @@ For libpython error:
     ```
 
 ### Install FALCON
+<!-- 安装 FALCON -->
 
 ```bash
 git clone https://github.com/LeCAR-Lab/FALCON.git
@@ -87,12 +94,18 @@ pip install -e isaac_utils
 ```
 
 # Motion Retargetting
+<!-- 运动重定向 -->
 Please refer to [PHC](https://github.com/ZhengyiLuo/PHC).
+<!-- 请参考 PHC 仓库 -->
 
 # FALCON Training
+<!-- FALCON 训练 -->
+
 ## Unitree G1_29DoF
+<!-- Unitree G1 29自由度机器人 -->
 <details>
 <summary>Training Command</summary>
+<!-- 训练命令 -->
 
 ```bash
 python humanoidverse/train_agent.py \
@@ -118,6 +131,7 @@ rewards.reward_penalty_degree=0.0001
 
 <details>
 <summary>Evaluation Command</summary>
+<!-- 评估命令 -->
 
 ```bash
 python humanoidverse/eval_agent.py \
@@ -127,6 +141,7 @@ python humanoidverse/eval_agent.py \
 
 
 After around `6k` iterations, in `IsaacGym`:
+<!-- 约 6k 次迭代后，在 IsaacGym 中： -->
 <table>
   <tr>
     <td style="text-align: center;">
@@ -136,8 +151,10 @@ After around `6k` iterations, in `IsaacGym`:
 </table>
 
 ## Booster T1_29DoF
+<!-- Booster T1 29自由度机器人 -->
 <details>
 <summary>Training Command</summary>
+<!-- 训练命令 -->
 
 ```bash
 python humanoidverse/train_agent.py \
@@ -170,6 +187,7 @@ env.config.apply_force_pos_ratio_range=[0.5,2.0]
 
 <details>
 <summary>Evaluation Command</summary>
+<!-- 评估命令 -->
 
 ```bash
 python humanoidverse/eval_agent.py \
@@ -179,6 +197,7 @@ python humanoidverse/eval_agent.py \
 
 
 After around `6k` iterations, in `IsaacGym`:
+<!-- 约 6k 次迭代后，在 IsaacGym 中： -->
 <table>
   <tr>
     <td style="text-align: center;">
@@ -188,7 +207,9 @@ After around `6k` iterations, in `IsaacGym`:
 </table>
 
 # FALCON Deploy
+<!-- FALCON 部署 -->
 We provide seamless sim2sim and sim2real deployment scripts supporting both [unitree_sdk2_python](https://github.com/unitreerobotics/unitree_sdk2_python) and [booster_robotics_sdk](https://github.com/hang0610/booster_robotics_sdk). Please refer to this [README](sim2real/README.md) for details.
+<!-- 提供无缝的 sim2sim 和 sim2real 部署脚本，支持 unitree_sdk2_python 和 booster_robotics_sdk。详情请参考 sim2real/README.md -->
 
 <table>
   <tr>
@@ -199,15 +220,20 @@ We provide seamless sim2sim and sim2real deployment scripts supporting both [uni
 </table>
 
 # FALCON Extension
+<!-- FALCON 扩展 -->
 
 ## Large Workspace
+<!-- 大工作空间 -->
 FALCON can be easily extended to larger workspace by setting larger torso command range and base height command range. We provide the sim2sim result of Unitree G1 with larger command range as an example:
+<!-- 通过设置更大的躯干命令范围和基座高度命令范围，FALCON 可轻松扩展到更大的工作空间。提供了 Unitree G1 扩大命令范围后的 sim2sim 结果示例： -->
 
 https://github.com/user-attachments/assets/2d92000e-b990-45aa-a4ad-032fe0158eba
 
 
 # Citation
+<!-- 引用 -->
 If you find our work useful, please consider citing us!
+<!-- 如果觉得本工作有用，请考虑引用我们！ -->
 
 ```bibtex
 @article{zhang2025falcon,
@@ -219,6 +245,7 @@ If you find our work useful, please consider citing us!
 ```
 
 Other work also using FALCON's dual-agent framework:
+<!-- 其他使用 FALCON 双智能体框架的工作： -->
 
 ```bibtex
 @article{li2025softa,
@@ -230,8 +257,12 @@ Other work also using FALCON's dual-agent framework:
 ```
 
 # Acknowledgement
+<!-- 致谢 -->
 **FALCON** is built upon [ASAP](https://github.com/LeCAR-Lab/ASAP) and [HumanoidVerse](https://github.com/LeCAR-Lab/HumanoidVerse).
+<!-- FALCON 基于 ASAP 和 HumanoidVerse 构建。 -->
 
 # License
+<!-- 许可证 -->
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<!-- 本项目采用 MIT 许可证 - 详情见 LICENSE 文件 -->
